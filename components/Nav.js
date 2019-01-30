@@ -9,7 +9,7 @@ const Nav = () => (
 
 const styles = StyleSheet.create({
   nav: {
-    flex: 1,
+    height: 80,
     backgroundColor: Colors.phc,
   },
 })
