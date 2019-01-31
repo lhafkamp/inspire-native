@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, ScrollView } from 'react-native'
+import { View } from 'react-native'
 import allCourses from '../allCourses'
 
-import Course from './Course'
+import CourseSection from './CourseSection'
 
 class CourseDisplayer extends React.Component {
   constructor() {
@@ -23,17 +23,9 @@ class CourseDisplayer extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.courseDisplayer}>
-        {this.state.courses.map(course => <Course courseData={course} key={course.name} />)}
-      </ScrollView>
+      <CourseSection courses={this.state.courses} />
     )
   }
 }
-
-const styles = StyleSheet.create({
-  courseDisplayer: {
-
-  },
-})
 
 export default CourseDisplayer
