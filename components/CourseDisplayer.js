@@ -10,12 +10,13 @@ class CourseDisplayer extends React.Component {
     super()
     this.state = {
       courses: [],
-      searchFilter: [],
       categoryFilter: [],
-      categories: []
+      categories: [],
+      searchQuery: ''
     }
 
     this.changeHandler = this.changeHandler.bind(this)
+    this.searchHandler = this.searchHandler.bind(this)
     this.filters = this.filters.bind(this)
   }
 
@@ -34,32 +35,25 @@ class CourseDisplayer extends React.Component {
   }
 
   changeHandler(e) {
-    let state = null
-    let value = null
-
-    switch(e._dispatchInstances.type) {
-      case 'RCTPicker':
-        state = 'categoryFilter'
-        value = e.nativeEvent.newValue
-        break
-      default:
-        state = 'searchFilter'
-        value = e.nativeEvent.text
-    }
-    
     this.setState({
-      [state]: value
+      categoryFilter: e.nativeEvent.newValue
+    })
+  }
+
+  searchHandler(query) {
+    this.setState({ 
+      searchQuery: query
     })
   }
 
   filters() {
-    const { courses, searchFilter, categoryFilter } = this.state
+    const { courses, searchFilter, categoryFilter, searchQuery } = this.state
 
     const filteredByCategory = courses
       .filter(course => categoryFilter !== 'all' ? course.category.includes(categoryFilter) : course.category)
 
     const filteredBySearch = courses
-      .filter(course => course.name.toLowerCase().includes(searchFilter) || course.description.toLowerCase().includes(searchFilter))
+      .filter(course => course.name.includes(searchQuery) || course.description.includes(searchQuery))
 
     const allFilters = filteredByCategory
       .filter(course => filteredBySearch.includes(course))
@@ -70,7 +64,12 @@ class CourseDisplayer extends React.Component {
   render() {
     return (
       <View>
-        <FilterSection onChange={this.changeHandler} categories={this.state.categories} />
+        <FilterSection 
+          onChange={this.changeHandler} 
+          onSearch={this.searchHandler}
+          query={this.state.searchQuery}
+          categories={this.state.categories} 
+        />
         <CourseSection courses={this.filters()} />
       </View>
     )

@@ -1,14 +1,21 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { SearchBar } from 'react-native-elements'
+import Icon from 'react-native-vector-icons'
 import Colors from '../constants/Colors'
 
-import SearchInput from './SearchInput'
 import CategoryPicker from './CategoryPicker'
 
-const FilterSection = ({ onChange, categories }) => (
+const FilterSection = ({ onChange, onSearch, query, categories }) => (
   <View style={styles.filterSection}>
     <Text style={styles.header}>Find your course</Text>
-    <SearchInput onChange={onChange} />
+    <SearchBar 
+      platform="ios" 
+      onChangeText={onSearch} 
+      value={query}
+      containerStyle={styles.containerStyle}
+      inputContainerStyle={styles.inputContainerStyle} 
+    />
     <CategoryPicker onChange={onChange} categories={categories} />
   </View>
 )
@@ -25,6 +32,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 20,
   },
+  containerStyle: {
+    backgroundColor: Colors.phc,
+  },
+  inputContainerStyle: {
+    backgroundColor: '#fff',
+  }
 })
 
 export default FilterSection
