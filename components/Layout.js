@@ -14,7 +14,6 @@ const Layout = () => (
 const styles = StyleSheet.create({
   layout: {
     flex: 1,
-    marginTop: 20,
   },
 })
 
