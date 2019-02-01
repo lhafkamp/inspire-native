@@ -1,5 +1,5 @@
 import React from 'react'
-import { Animated, StyleSheet, View } from 'react-native'
+import { Dimensions, Animated, StyleSheet, View } from 'react-native'
 import allCourses from '../allCourses'
 import { Overlay, SearchBar } from 'react-native-elements'
 import Icon from 'react-native-vector-icons'
@@ -65,7 +65,7 @@ class CourseDisplayer extends React.Component {
       .filter(course => categoryFilter !== 'all' ? course.category.includes(categoryFilter) : course.category)
 
     const filteredBySearch = courses
-      .filter(course => course.name.includes(searchQuery) || course.description.includes(searchQuery))
+      .filter(course => course.name.toLowerCase().includes(searchQuery.toLowerCase()) || course.description.toLowerCase().includes(searchQuery.toLowerCase()))
 
     const allFilters = filteredByCategory
       .filter(course => filteredBySearch.includes(course))
@@ -83,7 +83,10 @@ class CourseDisplayer extends React.Component {
           containerStyle={styles.containerStyle}
           inputContainerStyle={styles.searchInputStyle}
         />
-        <Overlay isVisible={this.state.isVisible}>
+        <Overlay 
+          isVisible={this.state.isVisible} 
+          width={Dimensions.get('window').width - 40} 
+          height={Dimensions.get('window').height - 120}>
           <FilterSection 
             categories={this.state.categories}
             onPress={this.pressHandler}
@@ -98,6 +101,7 @@ class CourseDisplayer extends React.Component {
   }
 }
 
+const width = Dimensions.get('window').width
 const styles = StyleSheet.create({
   courseDisplayer: {
     flex: 1,
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderColor: Colors.phc,
-    padding: 5,
+    padding: 8,
   },
   searchInputStyle: {
     borderRadius: 4,

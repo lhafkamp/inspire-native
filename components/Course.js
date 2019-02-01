@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { Card } from 'react-native-elements'
 import Colors from '../constants/Colors'
 
@@ -7,7 +7,7 @@ const Course = ({ courseData }) => {
   const { name, description, category, price } = courseData
 
   return (
-    <Card title={name} containerStyle={styles.course}>
+    <Card title={name} containerStyle={styles.course} titleStyle={{ textAlign: 'left' }}>
       <Text style={styles.desc}>{description}</Text>
       <Text style={styles.tag}>{category}</Text>
       <Text style={styles.priceTag}>${price}</Text>
@@ -15,21 +15,10 @@ const Course = ({ courseData }) => {
   )
 }
 
-const width = Dimensions.get('window').width - 40
 const styles = StyleSheet.create({
   course: {
     borderRadius: 4,
     shadowOpacity: 0,
-  },
-  header: {
-    color: Colors.textc,
-    alignSelf: 'stretch',
-    backgroundColor: Colors.lightgreen,
-    fontSize: 24,
-    fontWeight: 'bold',
-    padding: 20,
-    position: 'absolute',
-    width: width,
   },
   desc: {
     color: Colors.textc,
