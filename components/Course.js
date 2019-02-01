@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Card } from 'react-native-elements'
 import Colors from '../constants/Colors'
+import numberToCurrency from '../utils/numberToCurrency'
 
 const Course = ({ courseData }) => {
   const { name, description, category, price } = courseData
@@ -10,7 +11,7 @@ const Course = ({ courseData }) => {
     <Card title={name} containerStyle={styles.course} titleStyle={{ textAlign: 'left' }}>
       <Text style={styles.desc}>{description}</Text>
       <Text style={styles.tag}>{category}</Text>
-      <Text style={styles.priceTag}>${price}</Text>
+      <Text style={styles.priceTag}>{numberToCurrency(price)}</Text>
     </Card>
   )
 }
