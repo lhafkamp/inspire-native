@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 24,
     marginBottom: 10,
+    color: Colors.textc,
   },
   border: {
     borderBottomWidth: 1,

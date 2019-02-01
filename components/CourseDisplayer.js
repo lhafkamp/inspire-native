@@ -99,6 +99,7 @@ class CourseDisplayer extends React.Component {
           value={this.state.searchQuery}
           containerStyle={styles.containerStyle}
           inputContainerStyle={styles.searchInputStyle}
+          placeholder="Search for courses.."
         />
         <Overlay 
           isVisible={this.state.isVisible} 

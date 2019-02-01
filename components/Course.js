@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   course: {
     borderRadius: 4,
     shadowOpacity: 0,
+    marginBottom: 5,
   },
   desc: {
     color: Colors.textc,
@@ -38,8 +39,8 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     paddingHorizontal: 8,
     borderRadius: 4,
-    backgroundColor: '#4287D7',
-    borderColor: '#4287D7',
+    backgroundColor: Colors.lightgreen,
+    borderColor: Colors.lightgreen,
     borderWidth: 1,
     overflow: 'hidden',
   },
