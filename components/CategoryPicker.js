@@ -2,40 +2,54 @@ import React from 'react'
 import { Picker, StyleSheet, Text, View } from 'react-native'
 import Colors from '../constants/Colors'
 
-class CategoryPicker extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      pickerValue: 'all'
-    }
+const CategoryPicker = ({ onChange, categories, onValueChange, pickerValue }) => (
+  <View style={styles.categoryPicker}>
+    <Text style={styles.label}>Categories</Text>
+    <Picker onChange={onChange}
+      selectedValue={pickerValue}
+      onValueChange={onValueChange}
+      itemStyle={styles.pickerItem}
+    >
+      <Picker.Item label="all categories" value={pickerValue} />
+      {categories.map(category => <Picker.Item key ={category} label={category} value={category} />)}
+    </Picker>
+  </View>
+)
 
-    this.ValueChangeHandler = this.ValueChangeHandler.bind(this)
-  }
+// class CategoryPicker extends React.Component {
+//   constructor() {
+//     super()
+//     this.state = {
+//       pickerValue: 'all'
+//     }
 
-  ValueChangeHandler(e) {
-    this.setState({
-      pickerValue: e
-    })
-  }
+//     this.ValueChangeHandler = this.ValueChangeHandler.bind(this)
+//   }
 
-  render() {
-    const { onChange, categories } = this.props
+//   ValueChangeHandler(e) {
+//     this.setState({
+//       pickerValue: e
+//     })
+//   }
 
-    return (
-      <View style={styles.categoryPicker}>
-        <Text style={styles.label}>Categories</Text>
-        <Picker onChange={onChange}
-          selectedValue={this.state.pickerValue}
-          onValueChange={this.ValueChangeHandler}
-          itemStyle={styles.pickerItem}
-        >
-          <Picker.Item label="all categories" value={this.state.pickerValue} />
-          {categories.map(category => <Picker.Item key ={category} label={category} value={category} />)}
-        </Picker>
-      </View>
-    )
-  }
-}
+//   render() {
+//     const { onChange, categories, onValueChange } = this.props
+
+//     return (
+//       <View style={styles.categoryPicker}>
+//         <Text style={styles.label}>Categories</Text>
+//         <Picker onChange={onChange}
+//           selectedValue={this.state.pickerValue}
+//           onValueChange={onValueChange}
+//           itemStyle={styles.pickerItem}
+//         >
+//           <Picker.Item label="all categories" value={this.state.pickerValue} />
+//           {categories.map(category => <Picker.Item key ={category} label={category} value={category} />)}
+//         </Picker>
+//       </View>
+//     )
+//   }
+// }
 
 const styles = StyleSheet.create({
   categoryPicker: {

@@ -17,12 +17,14 @@ class CourseDisplayer extends React.Component {
       categoryFilter: [],
       categories: [],
       searchQuery: '',
-      isVisible: false
+      isVisible: false,
+      pickerValue: 'all',
     }
 
     this.changeHandler = this.changeHandler.bind(this)
     this.searchHandler = this.searchHandler.bind(this)
     this.pressHandler = this.pressHandler.bind(this)
+    this.ValueChangeHandler = this.ValueChangeHandler.bind(this)
     this.filters = this.filters.bind(this)
   }
 
@@ -58,6 +60,12 @@ class CourseDisplayer extends React.Component {
     })
   }
 
+  ValueChangeHandler(value) {
+    this.setState({
+      pickerValue: value
+    })
+  }
+
   filters() {
     const { courses, searchFilter, categoryFilter, searchQuery } = this.state
 
@@ -86,7 +94,9 @@ class CourseDisplayer extends React.Component {
           <FilterSection 
             onChange={this.changeHandler} 
             categories={this.state.categories}
-            onPress={this.pressHandler} 
+            onPress={this.pressHandler}
+            onValueChange={this.ValueChangeHandler}
+            pickerValue={this.state.pickerValue}
           />
         </Overlay>
         <CourseSection courses={this.filters()} />
