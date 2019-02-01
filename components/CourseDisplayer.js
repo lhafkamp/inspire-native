@@ -18,6 +18,8 @@ class CourseDisplayer extends React.Component {
       categories: [],
       searchQuery: '',
       isVisible: false,
+      rangeFilter: [0, 1000],
+      rangeMax: 1000,
     }
 
     this.searchHandler = this.searchHandler.bind(this)
@@ -33,10 +35,15 @@ class CourseDisplayer extends React.Component {
     Object.keys(allCourses).map(key => courseArr.push(allCourses[key]))
 
     courseArr.map(course => !categoryArr.includes(course.category) ? categoryArr.push(course.category) : null)
+    
+    const priceArr = courseArr.map(course => course.price)
+    const maxPrice = Math.round(Math.max(...priceArr))
 
     this.setState({
       courses: courseArr,
-      categories: categoryArr
+      categories: categoryArr,
+      rangeFilter: [0, maxPrice],
+      rangeMax: maxPrice,
     })
   }
 
@@ -53,13 +60,19 @@ class CourseDisplayer extends React.Component {
   }
 
   valueChangeHandler(value) {
+    if (typeof value === 'string') {
+      state = 'categoryFilter'
+    } else {
+      state = 'rangeFilter'
+    }
+
     this.setState({
-      categoryFilter: value
+      [state]: value
     })
   }
 
   filters() {
-    const { courses, searchFilter, categoryFilter, searchQuery } = this.state
+    const { courses, searchQuery, searchFilter, categoryFilter, rangeFilter } = this.state
 
     const filteredByCategory = courses
       .filter(course => categoryFilter !== 'all' ? course.category.includes(categoryFilter) : course.category)
@@ -67,8 +80,12 @@ class CourseDisplayer extends React.Component {
     const filteredBySearch = courses
       .filter(course => course.name.toLowerCase().includes(searchQuery.toLowerCase()) || course.description.toLowerCase().includes(searchQuery.toLowerCase()))
 
+    const filteredByRange = courses
+      .filter(course => course.price >= rangeFilter[0] && course.price <= rangeFilter[1] ? course.price : null)
+
     const allFilters = filteredByCategory
       .filter(course => filteredBySearch.includes(course))
+      .filter(course => filteredByRange.includes(course))
 
     return allFilters
   }
@@ -92,6 +109,8 @@ class CourseDisplayer extends React.Component {
             onPress={this.pressHandler}
             onValueChange={this.valueChangeHandler}
             categoryFilter={this.state.categoryFilter}
+            range={this.state.rangeFilter}
+            rangeMax={this.state.rangeMax}
           />
         </Overlay>
         <CourseSection courses={this.filters()} />

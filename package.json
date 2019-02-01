@@ -8,6 +8,7 @@
     "devtools": "react-devtools"
   },
   "dependencies": {
+    "@ptomasroos/react-native-multi-slider": "^1.0.0",
     "expo": "^32.0.0",
     "react": "16.5.0",
     "react-devtools": "^3.6.0",

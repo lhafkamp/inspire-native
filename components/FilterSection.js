@@ -5,28 +5,43 @@ import Icon from 'react-native-vector-icons'
 import Colors from '../constants/Colors'
 
 import CategoryPicker from './CategoryPicker'
+import PriceSlider from './PriceSlider'
 
-const FilterSection = ({ categories, onPress, onValueChange, categoryFilter }) => (
+const FilterSection = ({ categories, onPress, onValueChange, categoryFilter, rangeMax, range }) => (
   <View style={styles.filterSection}>
-    <Text style={styles.header}>Find your course</Text>
+    <View style={styles.border}>
+      <Text style={styles.header}>Filter options</Text>
+    </View>
     <CategoryPicker 
       categories={categories} 
       onValueChange={onValueChange} 
       categoryFilter={categoryFilter} 
     />
-    <Button title="done" onPress={onPress} />
+    <PriceSlider rangeMax={rangeMax} range={range} onValueChange={onValueChange} />
+    <Button title="done" onPress={onPress} style={styles.button} />
   </View>
 )
 
 const styles = StyleSheet.create({
   filterSection: {
-    padding: 20,
+    paddingTop: 15,
+    paddingBottom: 20,
+    paddingHorizontal: 20,
   },
   header: {
     fontWeight: 'bold',
     fontSize: 24,
-    marginBottom: 20,
+    marginBottom: 10,
   },
+  border: {
+    borderBottomWidth: 1,
+    borderColor: '#ccc',
+  },
+  button: {
+    position: 'absolute',
+    bottom: -90,
+    width: '100%',
+  }
 })
 
 export default FilterSection
