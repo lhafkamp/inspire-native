@@ -81,6 +81,7 @@ class CourseDisplayer extends React.Component {
           onChangeText={this.searchHandler}
           value={this.state.searchQuery}
           containerStyle={styles.containerStyle}
+          inputContainerStyle={styles.searchInputStyle}
         />
         <Overlay isVisible={this.state.isVisible}>
           <FilterSection 
@@ -105,6 +106,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderColor: Colors.phc,
+    padding: 5,
+  },
+  searchInputStyle: {
+    borderRadius: 4,
+    backgroundColor: Colors.phc,
   },
 })
 

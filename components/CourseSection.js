@@ -13,8 +13,7 @@ const CourseSection = ({ courses }) => (
 
 const styles = StyleSheet.create({
   courseSection: {
-    paddingVertical: 20,
-    backgroundColor: Colors.phc,
+    backgroundColor: '#fafafa',
   }
 })
 
