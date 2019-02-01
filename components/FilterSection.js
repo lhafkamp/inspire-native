@@ -6,14 +6,13 @@ import Colors from '../constants/Colors'
 
 import CategoryPicker from './CategoryPicker'
 
-const FilterSection = ({ onChange, categories, onPress, onValueChange, pickerValue }) => (
+const FilterSection = ({ categories, onPress, onValueChange, categoryFilter }) => (
   <View style={styles.filterSection}>
     <Text style={styles.header}>Find your course</Text>
     <CategoryPicker 
-      onChange={onChange} 
       categories={categories} 
       onValueChange={onValueChange} 
-      pickerValue={pickerValue} 
+      categoryFilter={categoryFilter} 
     />
     <Button title="done" onPress={onPress} />
   </View>
