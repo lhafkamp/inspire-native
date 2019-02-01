@@ -29,7 +29,7 @@ class CategoryPicker extends React.Component {
           onValueChange={this.ValueChangeHandler}
           itemStyle={styles.pickerItem}
         >
-          <Picker.Item label="all categories" value="all" />
+          <Picker.Item label="all categories" value={this.state.pickerValue} />
           {categories.map(category => <Picker.Item key ={category} label={category} value={category} />)}
         </Picker>
       </View>

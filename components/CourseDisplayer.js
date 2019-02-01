@@ -1,9 +1,13 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Animated, StyleSheet, View } from 'react-native'
 import allCourses from '../allCourses'
+import { Overlay, SearchBar } from 'react-native-elements'
+import Icon from 'react-native-vector-icons'
+import Colors from '../constants/Colors'
 
 import CourseSection from './CourseSection'
 import FilterSection from './FilterSection'
+import Nav from './Nav'
 
 class CourseDisplayer extends React.Component {
   constructor() {
@@ -12,11 +16,13 @@ class CourseDisplayer extends React.Component {
       courses: [],
       categoryFilter: [],
       categories: [],
-      searchQuery: ''
+      searchQuery: '',
+      isVisible: false
     }
 
     this.changeHandler = this.changeHandler.bind(this)
     this.searchHandler = this.searchHandler.bind(this)
+    this.pressHandler = this.pressHandler.bind(this)
     this.filters = this.filters.bind(this)
   }
 
@@ -46,6 +52,12 @@ class CourseDisplayer extends React.Component {
     })
   }
 
+  pressHandler() {
+    this.setState({
+      isVisible: !this.state.isVisible
+    })
+  }
+
   filters() {
     const { courses, searchFilter, categoryFilter, searchQuery } = this.state
 
@@ -63,17 +75,36 @@ class CourseDisplayer extends React.Component {
 
   render() {
     return (
-      <View>
-        <FilterSection 
-          onChange={this.changeHandler} 
-          onSearch={this.searchHandler}
-          query={this.state.searchQuery}
-          categories={this.state.categories} 
+      <View style={styles.courseDisplayer}>
+        <SearchBar 
+          platform="ios" 
+          onChangeText={this.searchHandler}
+          value={this.state.searchQuery}
+          containerStyle={styles.containerStyle}
         />
+        <Overlay isVisible={this.state.isVisible}>
+          <FilterSection 
+            onChange={this.changeHandler} 
+            categories={this.state.categories}
+            onPress={this.pressHandler} 
+          />
+        </Overlay>
         <CourseSection courses={this.filters()} />
+        <Nav onPress={this.pressHandler} />
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  courseDisplayer: {
+    flex: 1,
+  },
+  containerStyle: {
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderColor: Colors.phc,
+  },
+})
 
 export default CourseDisplayer

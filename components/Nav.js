@@ -1,16 +1,19 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { Button, StyleSheet, View } from 'react-native'
 import Colors from '../constants/Colors'
 
-const Nav = () => (
+const Nav = ({ onPress }) => (
   <View style={styles.nav}>
+    <Button title="press me" onPress={onPress} />
   </View>
 )
 
 const styles = StyleSheet.create({
   nav: {
     height: 70,
-    backgroundColor: Colors.textc,
+    backgroundColor: '#fff',
+    borderTopWidth: 1,
+    borderColor: Colors.phc,
   },
 })
 
