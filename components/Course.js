@@ -34,8 +34,10 @@ const styles = StyleSheet.create({
   desc: {
     color: Colors.textc,
     fontSize: 18,
-    paddingBottom: 60,
+    paddingTop: 10,
+    paddingBottom: 80,
     minHeight: 160,
+    lineHeight: 30,
   },
   tag: {
     position: 'absolute',
