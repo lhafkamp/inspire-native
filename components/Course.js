@@ -4,11 +4,14 @@ import { Card } from 'react-native-elements'
 import Colors from '../constants/Colors'
 import numberToCurrency from '../utils/numberToCurrency'
 
-const Course = ({ courseData }) => {
+const Course = ({ courseData, index, length }) => {
   const { name, description, category, price } = courseData
 
+  const firstCourse = index === 0 ? styles.firstCourse : null
+  const lastCourse = index === length - 1 ? styles.lastCourse : null
+
   return (
-    <Card title={name} containerStyle={styles.course} titleStyle={{ textAlign: 'left' }}>
+    <Card title={name} containerStyle={[styles.course, firstCourse, lastCourse]} titleStyle={{ textAlign: 'left' }}>
       <Text style={styles.desc}>{description}</Text>
       <Text style={styles.tag}>{category}</Text>
       <Text style={styles.priceTag}>{numberToCurrency(price)}</Text>
@@ -21,6 +24,12 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     shadowOpacity: 0,
     marginBottom: 5,
+  },
+  firstCourse: {
+    marginTop: 25,
+  },
+  lastCourse: {
+    marginBottom: 25,
   },
   desc: {
     color: Colors.textc,

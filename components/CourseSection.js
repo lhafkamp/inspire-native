@@ -7,14 +7,14 @@ import Course from './Course'
 const CourseSection = ({ courses }) => (
   <ScrollView style={styles.courseSection}>
     {courses.length ? courses
-      .map(course => <Course courseData={course} key={course.name} />) : <Text style={styles.noResults}>No results found</Text>}
+      .map((course, i) => <Course courseData={course} key={course.name} index={i} length={courses.length} />) : <Text style={styles.noResults}>No results found</Text>}
   </ScrollView>
 )
 
 const styles = StyleSheet.create({
   courseSection: {
     backgroundColor: '#fafafa',
-    padding: 10,
+    paddingHorizontal: 10,
   },
   noResults: {
     fontSize: 24,

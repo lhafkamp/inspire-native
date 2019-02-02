@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     paddingTop: 1,
     paddingHorizontal: 10,
-    height: 70,
     backgroundColor: '#fff',
     borderTopWidth: 1,
     borderColor: Colors.phc,

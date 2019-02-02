@@ -1,18 +1,17 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { SafeAreaView, StyleSheet } from 'react-native'
 
 import CourseDisplayer from './CourseDisplayer'
 
 const Layout = () => (
-  <View style={styles.layout}>
+  <SafeAreaView style={styles.layout}>
     <CourseDisplayer />
-  </View>
+  </SafeAreaView>
 )
 
 const styles = StyleSheet.create({
   layout: {
     flex: 1,
-    paddingTop: 20,
   },
 })
 

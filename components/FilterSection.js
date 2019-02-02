@@ -18,12 +18,14 @@ const FilterSection = ({ categories, onPress, onValueChange, categoryFilter, ran
       categoryFilter={categoryFilter} 
     />
     <PriceSlider rangeMax={rangeMax} range={range} onValueChange={onValueChange} />
-    <Button title="done" onPress={onPress} style={styles.button} />
+    <Button title="done" onPress={onPress} />
   </View>
 )
 
 const styles = StyleSheet.create({
   filterSection: {
+    flex: 1,
+    justifyContent: 'space-around',
     paddingTop: 15,
     paddingBottom: 20,
     paddingHorizontal: 20,
@@ -38,11 +40,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#ccc',
   },
-  button: {
-    position: 'absolute',
-    bottom: -90,
-    width: '100%',
-  }
 })
 
 export default FilterSection

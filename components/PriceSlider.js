@@ -5,7 +5,7 @@ import Colors from '../constants/Colors'
 import numberToCurrency from '../utils/numberToCurrency'
 
 const PriceSlider = ({ rangeMax, range, onValueChange }) => (
-  <View>
+  <View style={{ alignItems: 'center' }}>
     <Text style={styles.label}>Price range</Text>
     <View style={styles.prices}>
       <Text style={styles.price}>{numberToCurrency(range[0])}</Text>
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   },
   prices: {
     display: 'flex',
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

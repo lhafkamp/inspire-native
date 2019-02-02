@@ -97,8 +97,8 @@ class CourseDisplayer extends React.Component {
           platform="ios" 
           onChangeText={this.searchHandler}
           value={this.state.searchQuery}
-          containerStyle={styles.containerStyle}
-          inputContainerStyle={styles.searchInputStyle}
+          containerStyle={styles.searchContainer}
+          inputContainerStyle={styles.searchInput}
           placeholder="Search for courses.."
         />
         <Overlay 
@@ -126,13 +126,13 @@ const styles = StyleSheet.create({
   courseDisplayer: {
     flex: 1,
   },
-  containerStyle: {
+  searchContainer: {
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderColor: Colors.phc,
     padding: 8,
   },
-  searchInputStyle: {
+  searchInput: {
     borderRadius: 4,
     backgroundColor: Colors.phc,
   },
