@@ -7,6 +7,7 @@ import Colors from '../constants/Colors'
 
 import CourseSection from './CourseSection'
 import FilterSection from './FilterSection'
+import SortingSection from './SortingSection'
 import Controls from './Controls'
 
 class CourseDisplayer extends React.Component {
@@ -20,12 +21,17 @@ class CourseDisplayer extends React.Component {
       isVisible: false,
       rangeFilter: [0, 1000],
       rangeMax: 1000,
+      sortingVisible: false,
+      sortingOption: '',
     }
 
     this.searchHandler = this.searchHandler.bind(this)
     this.pressHandler = this.pressHandler.bind(this)
     this.valueChangeHandler = this.valueChangeHandler.bind(this)
+    this.sortHandler = this.sortHandler.bind(this)
     this.filters = this.filters.bind(this)
+    this.sorting = this.sorting.bind(this)
+    this.sortSelectHandler = this.sortSelectHandler.bind(this)
   }
 
   componentDidMount() {
@@ -59,6 +65,12 @@ class CourseDisplayer extends React.Component {
     })
   }
 
+  sortHandler() {
+    this.setState({
+      sortingVisible: !this.state.sortingVisible
+    })
+  }
+
   valueChangeHandler(value) {
     if (typeof value === 'string') {
       state = 'categoryFilter'
@@ -69,6 +81,31 @@ class CourseDisplayer extends React.Component {
     this.setState({
       [state]: value
     })
+  }
+
+  sortSelectHandler(value) {
+    this.setState({
+      sortingOption: value
+    })
+  }
+
+  sorting(courses) {
+    switch(this.state.sortingOption) {
+      case 'a-z':
+        return courses.sort((a, b) => a.name > b.name)
+        break
+      case 'z-a':
+        return courses.sort((a, b) => a.name < b.name)
+        break
+      case 'hi-lo':
+        return courses.sort((a, b) => a.price < b.price)
+        break
+      case 'lo-hi':
+        return courses.sort((a, b) => a.price > b.price)
+        break
+      default:
+        return courses
+    }
   }
 
   filters() {
@@ -87,7 +124,8 @@ class CourseDisplayer extends React.Component {
       .filter(course => filteredBySearch.includes(course))
       .filter(course => filteredByRange.includes(course))
 
-    return allFilters
+    const sortAndFilters = this.sorting(allFilters)
+    return sortAndFilters
   }
 
   render() {
@@ -116,8 +154,20 @@ class CourseDisplayer extends React.Component {
             rangeMax={rangeMax}
           />
         </Overlay>
+
+        <Overlay
+          isVisible={this.state.sortingVisible} 
+          width={Dimensions.get('window').width - 40} 
+          height={Dimensions.get('window').height - 120}>
+
+          <SortingSection 
+            onPress={this.sortHandler} 
+            sortingOption={this.state.sortingOption} 
+            sortSelect={this.sortSelectHandler} 
+          />
+        </Overlay>
         <CourseSection courses={this.filters()} />
-        <Controls onPress={this.pressHandler} />
+        <Controls onPress={this.pressHandler} onSortPress={this.sortHandler}/>
       </View>
     )
   }

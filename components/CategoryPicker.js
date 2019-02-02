@@ -11,7 +11,7 @@ const CategoryPicker = ({ categories, onValueChange, categoryFilter }) => (
       itemStyle={styles.pickerItem}
     >
       <Picker.Item label="all categories" value="all" />
-      {categories.map(category => <Picker.Item key ={category} label={category} value={category} />)}
+      {categories.map(category => <Picker.Item key={category} label={category} value={category} />)}
     </Picker>
   </View>
 )
