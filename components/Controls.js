@@ -3,7 +3,7 @@ import { Button, StyleSheet, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 import Colors from '../constants/Colors'
 
-const Nav = ({ onPress }) => (
+const Controls = ({ onPress }) => (
   <View style={styles.nav}>
     <Icon 
       onPress={onPress} 
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Nav
+export default Controls

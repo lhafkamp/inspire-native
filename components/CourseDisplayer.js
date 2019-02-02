@@ -7,7 +7,7 @@ import Colors from '../constants/Colors'
 
 import CourseSection from './CourseSection'
 import FilterSection from './FilterSection'
-import Nav from './Nav'
+import Controls from './Controls'
 
 class CourseDisplayer extends React.Component {
   constructor() {
@@ -117,7 +117,7 @@ class CourseDisplayer extends React.Component {
           />
         </Overlay>
         <CourseSection courses={this.filters()} />
-        <Nav onPress={this.pressHandler} />
+        <Controls onPress={this.pressHandler} />
       </View>
     )
   }
