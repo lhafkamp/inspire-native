@@ -9,7 +9,7 @@ const Nav = ({ onPress }) => (
       onPress={onPress} 
       type="octicon" 
       name="settings"
-      color="#4287D7"
+      color={Colors.iosBlue}
       reverse
     />
   </View>
@@ -17,8 +17,7 @@ const Nav = ({ onPress }) => (
 
 const styles = StyleSheet.create({
   nav: {
-    display: 'flex',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     paddingTop: 1,
     paddingHorizontal: 10,
     backgroundColor: '#fff',

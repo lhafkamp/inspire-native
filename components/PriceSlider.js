@@ -11,7 +11,13 @@ const PriceSlider = ({ rangeMax, range, onValueChange }) => (
       <Text style={styles.price}>{numberToCurrency(range[0])}</Text>
       <Text style={styles.price}>{numberToCurrency(range[1])}</Text>
     </View>
-    <MultiSlider values={[range[0], range[1]]} min={0} max={rangeMax} onValuesChange={onValueChange} />
+    <MultiSlider 
+      values={[range[0], range[1]]} 
+      min={0} 
+      max={rangeMax} 
+      onValuesChange={onValueChange}
+      selectedStyle={{ backgroundColor: Colors.iosBlue }}
+    />
   </View>
 )
 
@@ -22,7 +28,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   prices: {
-    display: 'flex',
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',

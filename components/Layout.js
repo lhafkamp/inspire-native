@@ -1,18 +1,12 @@
 import React from 'react'
-import { SafeAreaView, StyleSheet } from 'react-native'
+import { SafeAreaView } from 'react-native'
 
 import CourseDisplayer from './CourseDisplayer'
 
 const Layout = () => (
-  <SafeAreaView style={styles.layout}>
+  <SafeAreaView style={{ flex: 1 }}>
     <CourseDisplayer />
   </SafeAreaView>
 )
-
-const styles = StyleSheet.create({
-  layout: {
-    flex: 1,
-  },
-})
 
 export default Layout

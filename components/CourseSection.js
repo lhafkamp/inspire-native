@@ -13,7 +13,7 @@ const CourseSection = ({ courses }) => (
 
 const styles = StyleSheet.create({
   courseSection: {
-    backgroundColor: '#fafafa',
+    backgroundColor: Colors.lightBg,
     paddingHorizontal: 10,
   },
   noResults: {
