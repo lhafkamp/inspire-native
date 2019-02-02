@@ -91,27 +91,29 @@ class CourseDisplayer extends React.Component {
   }
 
   render() {
+    const { searchQuery, isVisible, categories, categoryFilter, rangeFilter, rangeMax } = this.state
+
     return (
       <View style={styles.courseDisplayer}>
         <SearchBar 
           platform="ios" 
           onChangeText={this.searchHandler}
-          value={this.state.searchQuery}
+          value={searchQuery}
           containerStyle={styles.searchContainer}
           inputContainerStyle={styles.searchInput}
           placeholder="Search for courses.."
         />
         <Overlay 
-          isVisible={this.state.isVisible} 
+          isVisible={isVisible} 
           width={Dimensions.get('window').width - 40} 
           height={Dimensions.get('window').height - 120}>
           <FilterSection 
-            categories={this.state.categories}
+            categories={categories}
             onPress={this.pressHandler}
             onValueChange={this.valueChangeHandler}
-            categoryFilter={this.state.categoryFilter}
-            range={this.state.rangeFilter}
-            rangeMax={this.state.rangeMax}
+            categoryFilter={categoryFilter}
+            range={rangeFilter}
+            rangeMax={rangeMax}
           />
         </Overlay>
         <CourseSection courses={this.filters()} />
