@@ -3,14 +3,14 @@ import { StyleSheet, Text, View, Picker } from 'react-native'
 import { Button } from 'react-native-elements'
 import Colors from '../constants/Colors'
 
-const SortingSection = ({ onPress, sortingOption, sortSelect }) => (
+const SortingSection = ({ onPress, onValueChange, sortingOption }) => (
   <View style={styles.sortingSection}>
     <View style={styles.border}>
       <Text style={styles.header}>Sorting options</Text>
     </View>
     <Text>Sort on</Text>
-    <Picker selectedValue={sortingOption} onValueChange={sortSelect}>
-      <Picker.Item label="title - a-z" value="a-z" />
+    <Picker selectedValue={sortingOption} onValueChange={onValueChange}>
+      <Picker.Item label="title - a-z (default)" value="a-z" />
       <Picker.Item label="title - z-a" value="z-a" />
       <Picker.Item label="price - low to high" value="lo-hi" />
       <Picker.Item label="price - high to low" value="hi-lo" />

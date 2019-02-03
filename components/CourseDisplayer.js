@@ -4,6 +4,7 @@ import allCourses from '../allCourses'
 import { Overlay, SearchBar } from 'react-native-elements'
 import Icon from 'react-native-vector-icons'
 import Colors from '../constants/Colors'
+import sortItems from '../utils/sortItems'
 
 import CourseSection from './CourseSection'
 import FilterSection from './FilterSection'
@@ -15,23 +16,24 @@ class CourseDisplayer extends React.Component {
     super()
     this.state = {
       courses: [],
-      categoryFilter: 'all',
-      categories: [],
       searchQuery: '',
-      isVisible: false,
+      categories: [],
+      categoryFilter: 'all',
       rangeFilter: [0, 1000],
       rangeMax: 1000,
-      sortingVisible: false,
-      sortingOption: '',
+      sortingOption: 'a-z',
+      isVisible: false,
+      showFilterOverlay: true,
     }
 
     this.searchHandler = this.searchHandler.bind(this)
-    this.pressHandler = this.pressHandler.bind(this)
     this.valueChangeHandler = this.valueChangeHandler.bind(this)
-    this.sortHandler = this.sortHandler.bind(this)
+    this.sortSelectHandler = this.sortSelectHandler.bind(this)
+    this.showSortOverlay = this.showSortOverlay.bind(this)
+    this.showFilterOverlay = this.showFilterOverlay.bind(this)
     this.filters = this.filters.bind(this)
     this.sorting = this.sorting.bind(this)
-    this.sortSelectHandler = this.sortSelectHandler.bind(this)
+    this.sortAndFilter = this.sortAndFilter.bind(this)
   }
 
   componentDidMount() {
@@ -59,19 +61,23 @@ class CourseDisplayer extends React.Component {
     })
   }
 
-  pressHandler() {
+  showFilterOverlay() {
     this.setState({
+      showFilterOverlay: true,
       isVisible: !this.state.isVisible
     })
   }
 
-  sortHandler() {
+  showSortOverlay() {
     this.setState({
-      sortingVisible: !this.state.sortingVisible
+      showFilterOverlay: false,
+      isVisible: !this.state.isVisible
     })
   }
 
   valueChangeHandler(value) {
+    let state = null
+
     if (typeof value === 'string') {
       state = 'categoryFilter'
     } else {
@@ -91,20 +97,17 @@ class CourseDisplayer extends React.Component {
 
   sorting(courses) {
     switch(this.state.sortingOption) {
-      case 'a-z':
-        return courses.sort((a, b) => a.name > b.name)
-        break
       case 'z-a':
-        return courses.sort((a, b) => a.name < b.name)
-        break
-      case 'hi-lo':
-        return courses.sort((a, b) => a.price < b.price)
+        return sortItems(courses, { sortOn: 'name', reverse: true })
         break
       case 'lo-hi':
-        return courses.sort((a, b) => a.price > b.price)
+        return sortItems(courses, { sortOn: 'price' })
+        break
+      case 'hi-lo':
+        return sortItems(courses, { sortOn: 'price', reverse: true })
         break
       default:
-        return courses
+        return sortItems(courses, { sortOn: 'name' })
     }
   }
 
@@ -124,8 +127,11 @@ class CourseDisplayer extends React.Component {
       .filter(course => filteredBySearch.includes(course))
       .filter(course => filteredByRange.includes(course))
 
-    const sortAndFilters = this.sorting(allFilters)
-    return sortAndFilters
+    return allFilters
+  }
+
+  sortAndFilter() {
+    return this.sorting(this.filters())
   }
 
   render() {
@@ -145,35 +151,34 @@ class CourseDisplayer extends React.Component {
           isVisible={isVisible} 
           width={Dimensions.get('window').width - 40} 
           height={Dimensions.get('window').height - 120}>
-          <FilterSection 
-            categories={categories}
-            onPress={this.pressHandler}
-            onValueChange={this.valueChangeHandler}
-            categoryFilter={categoryFilter}
-            range={rangeFilter}
-            rangeMax={rangeMax}
-          />
-        </Overlay>
 
-        <Overlay
-          isVisible={this.state.sortingVisible} 
-          width={Dimensions.get('window').width - 40} 
-          height={Dimensions.get('window').height - 120}>
-
-          <SortingSection 
-            onPress={this.sortHandler} 
-            sortingOption={this.state.sortingOption} 
-            sortSelect={this.sortSelectHandler} 
-          />
+          {this.state.showFilterOverlay ?
+            <FilterSection 
+              categories={categories}
+              onPress={this.showFilterOverlay}
+              onValueChange={this.valueChangeHandler}
+              categoryFilter={categoryFilter}
+              range={rangeFilter}
+              rangeMax={rangeMax}
+            />
+          :
+            <SortingSection 
+              onPress={this.showSortOverlay}
+              sortingOption={this.state.sortingOption} 
+              onValueChange={this.sortSelectHandler} 
+            />
+          }
         </Overlay>
-        <CourseSection courses={this.filters()} />
-        <Controls onPress={this.pressHandler} onSortPress={this.sortHandler}/>
+        <CourseSection courses={this.sortAndFilter()} />
+        <Controls 
+          showFilterOverlay={this.showFilterOverlay} 
+          showSortOverlay={this.showSortOverlay} 
+        />
       </View>
     )
   }
 }
 
-const width = Dimensions.get('window').width
 const styles = StyleSheet.create({
   courseDisplayer: {
     flex: 1,

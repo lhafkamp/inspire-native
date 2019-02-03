@@ -3,17 +3,17 @@ import { Button, StyleSheet, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 import Colors from '../constants/Colors'
 
-const Controls = ({ onPress, onSortPress }) => (
+const Controls = ({ showFilterOverlay, showSortOverlay }) => (
   <View style={styles.nav}>
     <Icon 
-      onPress={onPress} 
+      onPress={showFilterOverlay} 
       type="octicon" 
       name="settings"
       color={Colors.iosBlue}
       reverse
     />
     <Icon 
-      onPress={onSortPress} 
+      onPress={showSortOverlay} 
       type="material-community" 
       name="sort-alphabetical"
       color={Colors.iosBlue}
