@@ -25,7 +25,7 @@ const FilterSection = ({ categories, onPress, onValueChange, categoryFilter, ran
 const styles = StyleSheet.create({
   filterSection: {
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     paddingTop: 15,
     paddingBottom: 20,
     paddingHorizontal: 20,

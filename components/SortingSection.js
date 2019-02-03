@@ -8,8 +8,11 @@ const SortingSection = ({ onPress, onValueChange, sortingOption }) => (
     <View style={styles.border}>
       <Text style={styles.header}>Sorting options</Text>
     </View>
-    <Text>Sort on</Text>
-    <Picker selectedValue={sortingOption} onValueChange={onValueChange}>
+    <Picker 
+      selectedValue={sortingOption} 
+      onValueChange={onValueChange} 
+      itemStyle={styles.pickerItem}
+    >
       <Picker.Item label="title - a-z (default)" value="a-z" />
       <Picker.Item label="title - z-a" value="z-a" />
       <Picker.Item label="price - low to high" value="lo-hi" />
@@ -22,7 +25,7 @@ const SortingSection = ({ onPress, onValueChange, sortingOption }) => (
 const styles = StyleSheet.create({
   sortingSection: {
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     paddingTop: 15,
     paddingBottom: 20,
     paddingHorizontal: 20,
@@ -36,6 +39,14 @@ const styles = StyleSheet.create({
   border: {
     borderBottomWidth: 1,
     borderColor: '#ccc',
+  },
+  label: {
+    color: Colors.textc,
+    fontSize: 18,
+    paddingVertical: 10,
+  },
+  pickerItem: {
+    marginTop: -40,
   },
 })
 

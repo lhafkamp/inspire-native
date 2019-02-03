@@ -25,7 +25,10 @@ const styles = StyleSheet.create({
   label: {
     color: Colors.textc,
     fontSize: 18,
+    fontWeight: 'bold',
     paddingVertical: 10,
+    alignSelf: 'flex-start',
+    marginBottom: 10,
   },
   prices: {
     width: '100%',

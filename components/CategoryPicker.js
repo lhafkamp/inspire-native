@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   label: {
     color: Colors.textc,
     fontSize: 18,
+    fontWeight: 'bold',
     paddingVertical: 10,
   },
   pickerItem: {

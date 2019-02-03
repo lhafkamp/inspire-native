@@ -149,8 +149,8 @@ class CourseDisplayer extends React.Component {
         />
         <Overlay 
           isVisible={isVisible} 
-          width={Dimensions.get('window').width - 40} 
-          height={Dimensions.get('window').height - 120}>
+          width={width - width * 10 / 100}
+          height={height - height * 10 / 100}>
 
           {this.state.showFilterOverlay ?
             <FilterSection 
@@ -179,6 +179,8 @@ class CourseDisplayer extends React.Component {
   }
 }
 
+const width = Dimensions.get('window').width
+const height = Dimensions.get('window').height
 const styles = StyleSheet.create({
   courseDisplayer: {
     flex: 1,
